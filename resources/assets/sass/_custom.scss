@@ -1,0 +1,31 @@
+body {
+  background: whitesmoke !important;
+  color: #636b6f;
+}
+a:link {
+  color: #636b6f;
+}
+
+.card {
+  background-color: #f5e79e;
+  border: 3px solid;
+  border-radius: 25px;
+  border-color: #2a88bd;
+  color:black;
+  text-align: justify;
+  padding: 10px;
+  height: 100%;
+
+
+}
+
+.card h1, h2 {
+  text-align: center;
+}
+.card p {
+  font-family: "Raleway", sans-serif;
+  font-size: medium;
+}
+.card-img-top {
+  text-align: center;
+}
