@@ -1,10 +1,31 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
+
+
 
 class Post extends Model
 {
-   protected $fillable=['title', 'anotation', 'author', 'sadala', 'body', 'trumbnail', 'articlepic'];
+    
+     public function comments()
+    {
+         
+        return $this->hasMany('App\Comment')->withTrashed();
+    }
+    
+    public function sadalas()
+    {
+         
+         return $this->belongsTo('App\Sadala','sadala_id');
+    }
+    
+    public function answers()
+    {
+         
+        return $this->hasMany('App\Answer', 'post_id');
+    }
+
+   protected $fillable=['title', 'anotation', 'author', 'sadala_id', 'body', 'trumbnail', 'articlepic'];
+   
 }

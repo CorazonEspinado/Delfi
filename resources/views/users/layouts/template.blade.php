@@ -56,22 +56,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+                
 
-                    @foreach($sadalas as $sadala)
-                    <li>
-                    <a href="{{route('sadalaShow', ['id'=>$sadala->sadala_name])}}">{{$sadala->sadala_name}}</a>
-                    </li>
-                        @endforeach
-
-        <!--        <li>
-                    <a href="services.html">Services</a>
+                    
+@foreach ($sadalas as $sadala)
+               <li>
+                    <a href="{{url('sadalaShow', ['id'=>$sadala->id])}}">{{$sadala->sadala_name}}</a>
                 </li>
-                <li>
-                    <a href="contact.html">Contact</a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+                @endforeach
+               
+                    
+                    <!--<ul class="dropdown-menu">
                         <li>
                             <a href="portfolio-1-col.html">1 Column Portfolio</a>
                         </li>
@@ -173,4 +168,5 @@
 @include('messages')
 @yield('fresh_news')
 @yield('show_content')
+@yield('show_content_reply')
 <!-- Page Content -->

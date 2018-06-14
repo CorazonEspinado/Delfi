@@ -19,12 +19,14 @@
 
                 </h2>
             </div>
+            
             @foreach($posts as $post)
                 <a href="{{route('AdminArticleShow', ['id'=>$post->id])}}">
                     <div class="col-md-4 col-sm-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h2 align="center"><i class="fa fa-fw fa-check"></i>{{$post->title}}</h2>
+                                
+                                <h2 align="center"><i class="fa fa-fw fa-check"></i>{{$post->title}} <span style="color:red" <p>({{ count($post->comments)}})</p></span></h2>
 
                             </div>
                             <div class="panel-body">
@@ -32,8 +34,9 @@
                                 <img src="{{$post->trumbnail}}" style="text-align: center">
                                 </p>
                                 <p>{{$post->anotation}}</p>
+                                
                                 <br>
-                                <br>
+                                <h4>Раздел: {{$post->sadala}}</h4>
                                 <h4>Автор статьи: {{$post->author}}</h4>
                                 <h4>{{$post->created_at}}</h4>
 

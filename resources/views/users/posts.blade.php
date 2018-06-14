@@ -13,18 +13,26 @@
                 <h2 class="page-header" align="center">
 
                 </h2>
-
+    
             @foreach($posts as $post)
+            
                     <a href="{{route('articleShow', ['id'=>$post->id])}}">
                 <div class="col-md-4 col-sm-3 col-lg-3">
 
 
+
+
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
-
-                            <h3 align="center"><i class="fa fa-fw fa-check"></i> {{$post->title}}</h3>
-                            <h4>Автор статьи: {{$post->author}}</h4>
-                             <p>Раздел: {{$post->sadala}}</p>
+                            
+                            <h4 align="center"><i class="fa fa-fw fa-check"></i> {{$post->title}}  <span style="color:red" <p>({{count($post->answers)+count($post->comments)}})</p></span></h4>
+                             <h4>Автор статьи: {{$post->author}}</h4>
+                           
+                                                  
+                            
+                             <p>Раздел: {{$post->sadalas['sadala_name']}} </p>
+                            
                             <p>Опубликовано: {{$post->created_at}}</p>
                         </div>
                         <div class="panel-body">
@@ -39,7 +47,9 @@
 
                     </div>
                     </a>
-                @endforeach
+                
+                
+                 @endforeach
         </div>
 
 

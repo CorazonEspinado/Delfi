@@ -13,24 +13,30 @@ class MainController extends Controller
 {
     public function Main()
     {
-
-
         $posts = Post::orderBy('created_at', 'desc')->get();
-        $sadalas = sadala::all();
+        
+        $sadalas=sadala::all();
+//        $tmp  = Post::find(29);
+//        $tmp1 = $tmp->sadalas;
+//         $tmp2 = $tmp1->sadala_name;
+//         dd($tmp2); 
+//        foreach ($posts->sadalas as $post) {
+//    echo $post->sadalas;
+//        dd($posts->sadalas);
+//        dd($posts);
+//}
+     
 
 
-        return view('users.posts')->with(['sadalas' => $sadalas,
-            'posts' => $posts]);
+        
+            return view('users.posts')->with(['posts' =>$posts, 'sadalas'=>$sadalas]);
     }
-
-
-    public function sadalaShow($sadala_name)
+    public function sadalaShow($id)
     {
+        
         $sadalas = sadala::all();
-
-
-        $sadalas_posts = Post::where('sadala', $sadala_name)->get();
-
+        $sadalas_posts = Post::where('sadala_id', $id)->get();
+      
         return view('users.posts')->with(['posts' => $sadalas_posts,
             'sadalas' => $sadalas]);
 
@@ -38,19 +44,15 @@ class MainController extends Controller
 
     public function CommentStore(Request $request, $id, $ip)
     {
-
-return ('a');
-        
+///
     }
     public function articleShow($id)
     {
         $show=Post::find($id);
         $sadalas=sadala::all();
-        $comments=Comment::withTrashed()->where('post_id', $id)->get();
-
-    return view ('users.show')->with(['show'=>$show,
-        'sadalas'=>$sadalas,
-        'comments'=>$comments]);
+      
+    return view ('users.show')->with(['posts'=>$show,
+        'sadalas'=>$sadalas]);
     }
 
 }

@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/OSPanel/domains/delfi/resources/views/users/show.blade.php</file>
+            <file>file:/D:/OSPanel/domains/delfi/resources/views/users/posts.blade.php</file>
+            <file>file:/D:/OSPanel/domains/delfi/app/Sadala.php</file>
+            <file>file:/D:/OSPanel/domains/delfi/app/Post.php</file>
+            <file>file:/D:/OSPanel/domains/delfi/app/Http/Controllers/MainController.php</file>
+        </group>
     </open-files>
 </project-private>

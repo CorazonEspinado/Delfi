@@ -13,12 +13,16 @@
 
 Route::get('/','MainController@Main')->name('main');
 
-Route::get('post/{id}', 'MainController@sadalaShow')->name('sadalaShow');
-Route::post('{id}/{ip}', 'CommentController@store')->name('CommentStore');
+Route::get('sadalaShow/{id}', 'MainController@sadalaShow')->name('sadalaShow');
+Route::post('CommentStore/{id}/{ip}', 'CommentController@store')->name('CommentStore');
+Route::post('{post_id}/{comment_id}/{ip}', 'CommentController@ReplyStore')->name('CommentReplyStore');
+
 Route::get('DeleteComment/{commentid}/{postid}', 'CommentController@destroy')->name('CommentDelete');
-Route::resource('Comments', 'CommentController');
+
+
 
 Route::get('articleShow/{id}', 'MainController@articleShow')->name('articleShow');
+Route::post('{post_id}/{comment_id}','CommentController@ReplyToComment')->name('ReplyToComment');
 
 Route::post('articleStore','AdminPostController@store')->name('articleStore');
 Route::get('page/create','AdminPostController@create')->name('articleCreate');

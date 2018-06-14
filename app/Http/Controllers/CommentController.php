@@ -7,6 +7,7 @@ use App\Post;
 use App\Sadala;
 use App\Comment;
 use SoftDelete;
+use App\Answer;
 
 class CommentController extends Controller
 {
@@ -52,6 +53,30 @@ class CommentController extends Controller
 
 
     }
+    
+    public function ReplyStore(Request $request)
+    {
+      
+        $this->validate($request, [
+            'replyname' => 'required|max:30',
+            'replycomment' => 'required|max:100'
+        ]);
+        Answer::Create([
+            'answer_author'=>$request['replyname'],
+            'answer_text'=>$request['replycomment'],
+            'comment_id'=>$request['comment_id'],
+                'post_id'=>$request['post_id']
+        ]);
+        
+        $request->session()->flash('success', 'Комментарий размещен!');
+      return redirect()->route('articleShow', $request->post_id);
+        
+        
+//        $request->session()->flash('success', 'Комментарий размещен!');
+//      return redirect()->route('articleShow', $id);
+
+
+    }
 
     /**
      * Display the specified resource.
@@ -61,7 +86,10 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $show = Post::find($id);
+        $show = Post::find($id)->with('Answers');
+        foreach ($answers as $answer) {
+            dd($answer);
+}
         $comments = Comment::select()->where('post_id', $id)->get();
         return view('admins.article_show')->with(['show' => $show,
 
@@ -104,4 +132,13 @@ class CommentController extends Controller
        
        return redirect()->route('AdminArticleShow', $postid)->with('success', 'Комментарий удалён');;
         }
+        
+       public function ReplyToComment($comment_id,$post_id){
+           $comment=Comment::find($comment_id);
+           $sadalas = sadala::all();
+           return view ('users.replytocomment')->with(
+                ['post_id'=>$post_id,
+               'comment'=>$comment,
+               'sadalas'=>$sadalas]);
+       }
 }
