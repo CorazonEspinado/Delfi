@@ -10,8 +10,8 @@
         <ol class="breadcrumb">
             <li><a href="/admin">Главная страница</a>
             </li>
-            <li class="active">  <a href="{{route('sadalaShow', ['id'=>$show->sadala])}}"> {{$show->sadala}}</a>
             </li>
+            <li class="active">  <a href="{{route('AdminSadalaShow', ['id'=>$show->sadala_id])}}"> {{$show->sadalas['sadala_name']}}</a>
         </ol>
 
         <!-- Page Heading/Breadcrumbs -->
@@ -20,7 +20,7 @@
         <a class="btn btn-danger" href="{{route('articleDelete',['id'=>$show->id])}}">Удалить</a>
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"><h1>{{$show->title}} <span style="color: red">({{count($comments)}})</span></h1>
+                <h1 class="page-header"><h1>{{$show->title}} <span style="color: red">({{count($show->answers)+count($show->comments)}})</span></h1>
                     <small>by <a href="#">{{$show->author}}</a>
                     </small>
                 </h1>
@@ -42,6 +42,7 @@
                 <!-- Date/Time -->
                 <p><i class="fa fa-clock-o"></i> Опубликовано {{$show->created_at}}</p>
                 <p>Автор: {{$show->author}}</p>
+                <p>Раздел: {{$show->sadalas['sadala_name']}}</p>
 
                 <hr>
 
@@ -54,7 +55,7 @@
 
                 <!-- Post Content -->
                 <p>{{$show->body}}</p>
-                <a class="btn btn-lg btn-default btn-block" href="{{route('sadalaShow', ['id'=>$show->sadala])}}">Все статьи этого раздела</a>
+                <a class="btn btn-lg btn-default btn-block" href="{{route('AdminSadalaShow', ['id'=>$show->sadala_id])}}">Все статьи этого раздела</a>
 
                 <hr>
 
@@ -63,9 +64,10 @@
                 <!-- Comments Form -->
                 <div class="well">
                     IP-adress: {{$_SERVER['REMOTE_ADDR']}}
-                    <form role="form" method="POST" action="{{route('CommentStore', ['id'=>$show->id, 'ip'=>$_SERVER['REMOTE_ADDR']])}}">
+                    <form role="form" method="POST" action="{{route('AdminCommentStore', ['id'=>$show->id, 'ip'=>$_SERVER['REMOTE_ADDR']])}}">
                         <label for="Name">Имя:<span style="color: red">*</span></label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control" id="moder" name="moder" value="Модер" disabled="ввввввввввв">
+                        <input type="hidden" id="name" name="name" value="Модер">
                         <div class="form-group">
                             <label for="comment">Комментарий:<span style="color: red">*</span> </label>
                             <textarea class="form-control" rows="3" id="comment" name="comment"></textarea>
@@ -92,7 +94,7 @@
                 @else
                     @foreach($comments as $comment)
                         <div class="media">
-                            <a class="pull-left" href="#">
+                            <a class="pull-left">
                                 <img class="media-object" src="http://placehold.it/64x64" alt="">
                             </a>
                             <div class="media-body">
@@ -102,10 +104,39 @@
                                 </h4>
                                 @if (empty($comment->deleted_at))
                                 {{$comment->comment}}
+                                <form role="form" method="POST" action="{{route('AdminReplyComment', 
+                                    ['comment_id'=>$comment->post_id, 
+                                  'post_id'=>$comment->id])}}">
+                           <input type="submit" name="submit" value="Ответить">
+                           {{csrf_field()}}
+                        </form>
                                 <a class="btn btn-danger" href="{{route('CommentDelete',['commentid'=>$comment->id, 'postid'=>$show->id])}}">Удалить</a>
                                 @else
-                                <h4>{{$comment->comment}} <span style="color: red">Комментарий был удалён {{$comment->deleted_at}}</span></h4>
+                                <h4>{{$comment->comment}} <span style="color: red">Комментарий был удалён модератором {{$comment->deleted_at}}</span></h4>
+                               
                                 @endif
+                                @if (count($comment->answers)>0)
+                        
+                        @foreach ($comment->answers as $answer)
+                        <div class="media">
+                        <a class="pull-left">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        </a>
+                        <div class="media-body">
+                           <h4 class="media-heading">{{$answer->answer_author}}
+                                <small>{{$answer->created_at}} IP:</small>
+                            </h4>
+                            @if (empty ($answer->deleted_at))
+                            {{$answer->answer_text}}
+                            <a class="btn btn-danger" href="{{route('AnswerDelete',['commentanswerid'=>$answer->id, 'answerpostid'=>$show->id])}}">Удалить</a>
+                        @else
+                        <h4>{{$answer->answer_text}} <span style="color: red">Ответ был удален модератором {{$answer->deleted_at}}</span></h4>
+                        @endif
+                         <!--End Nested Comment--> 
+                    </div>
+                </div>
+                        @endforeach
+                        @endif
                             </div>
                             
                         </div>

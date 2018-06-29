@@ -143,4 +143,5 @@
 @yield('fresh_news')
 @yield('show_content')
 @yield('sadalaform')
+@yield ('show_admin_reply')
 <!-- Page Content -->

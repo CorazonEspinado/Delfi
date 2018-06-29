@@ -8,7 +8,7 @@
         <!-- Marketing Icons Section -->
         <div class="row">
            <a href="{{ route('articleCreate') }}"> <button class="btn btn-primary">Новая статья</button></a>
-            <a href="/users/index"> <button class="btn btn-primary">Пользователи</button></a>
+           <a href="/users/index"> <button class="btn btn-primary" disabled="">Пользователи</button></a>
             <a href="/admin/sadalas/new_sadala"> <button class="btn btn-primary">Новый раздел</button></a>
             <div class="col-lg-12">
                 <h1 class="page-header" align="center">
@@ -26,17 +26,17 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 
-                                <h2 align="center"><i class="fa fa-fw fa-check"></i>{{$post->title}} <span style="color:red" <p>({{ count($post->comments)}})</p></span></h2>
+                                <h2 align="center"><i class="fa fa-fw fa-check"></i>{{$post->title}} <span style="color:red" <p>({{count($post->answers)+count($post->comments)}})</p></span></h2>
 
                             </div>
                             <div class="panel-body">
                                 <p style="text-align:center;">
-                                <img src="{{$post->trumbnail}}" style="text-align: center">
+                                <img src="/{{$post->trumbnail}}" style="text-align: center">
                                 </p>
                                 <p>{{$post->anotation}}</p>
                                 
                                 <br>
-                                <h4>Раздел: {{$post->sadala}}</h4>
+                                <h4>Раздел: {{$post->sadalas['sadala_name']}}</h4>
                                 <h4>Автор статьи: {{$post->author}}</h4>
                                 <h4>{{$post->created_at}}</h4>
 

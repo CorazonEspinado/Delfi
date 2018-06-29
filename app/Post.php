@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
+
 class Post extends Model
 {
     
@@ -23,7 +24,7 @@ class Post extends Model
     public function answers()
     {
          
-        return $this->hasMany('App\Answer', 'post_id');
+        return $this->hasMany('App\Answer', 'post_id')->withTrashed();;
     }
 
    protected $fillable=['title', 'anotation', 'author', 'sadala_id', 'body', 'trumbnail', 'articlepic'];

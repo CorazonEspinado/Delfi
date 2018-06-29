@@ -22,9 +22,9 @@
     
     <div class='form-group'>
         <label for='sadala'>Sadala</label>
-         <select class="form-control" name="sadala">
+         <select class="form-control" name="sadalaid">
             @foreach($sadalas as $sadala)
-                <option value="{{$sadala->sadala_name}}">{{$sadala->sadala_name}}</option>
+                <option value="{{$sadala->id}}">{{$sadala->sadala_name}}</option>
             @endforeach
         </select>
     </div>

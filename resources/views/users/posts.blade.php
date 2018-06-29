@@ -19,17 +19,12 @@
                     <a href="{{route('articleShow', ['id'=>$post->id])}}">
                 <div class="col-md-4 col-sm-3 col-lg-3">
 
-
-
-
-
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             
                             <h4 align="center"><i class="fa fa-fw fa-check"></i> {{$post->title}}  <span style="color:red" <p>({{count($post->answers)+count($post->comments)}})</p></span></h4>
                              <h4>Автор статьи: {{$post->author}}</h4>
-                           
-                                                  
+                                                                          
                             
                              <p>Раздел: {{$post->sadalas['sadala_name']}} </p>
                             
@@ -51,11 +46,11 @@
                 
                  @endforeach
         </div>
-
-
-
             </div>
         </a>
+        <div class="col-md-4">
+                    <a class="btn btn-lg btn-default btn-block" href="{{route('SubscribePaperForm')}}">Подписаться на свежую газетку!</a>
+                </div>
 
         <!-- /.row -->
 

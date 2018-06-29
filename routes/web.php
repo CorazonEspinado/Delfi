@@ -11,31 +11,46 @@
 |
 */
 
+
+//---User
 Route::get('/','MainController@Main')->name('main');
+//-------User subscribe paper
+Route::get('SubscribeForm', 'SubscribeController@SubscribeForm')->name('SubscribePaperForm');
+Route::post('SubmitInfoStore', 'SubscribeController@SubscribeStore')->name('SubmitInfoStore');
+//-----------------------
 
-Route::get('sadalaShow/{id}', 'MainController@sadalaShow')->name('sadalaShow');
+Route::get('articleShow/{id}', 'MainController@articleShow')->name('articleShow');//--Show Page
+Route::get('sadalaShow/{id}', 'MainController@sadalaShow')->name('sadalaShow');//---All Pages from Sadala
+//------User Comments
 Route::post('CommentStore/{id}/{ip}', 'CommentController@store')->name('CommentStore');
-Route::post('{post_id}/{comment_id}/{ip}', 'CommentController@ReplyStore')->name('CommentReplyStore');
+Route::post('CommentReplyStore/{post_id}/{comment_id}/{ip}', 'CommentController@ReplyStore')->name('CommentReplyStore');
+Route::post('ReplyToComment/{post_id}/{comment_id}','CommentController@ReplyToComment')->name('ReplyToComment');
 
-Route::get('DeleteComment/{commentid}/{postid}', 'CommentController@destroy')->name('CommentDelete');
+//-------Admin
+Route::get('/admin', 'AdminPostController@index');
 
+//-----Admin Posts
+Route::get('page/create','AdminPostController@create')->name('articleCreate'); //--Post Create Page
+Route::post('articleStore','AdminPostController@store')->name('articleStore');//---Post Save
+Route::get('articleEdit/{id}', 'AdminPostController@edit')->name('articleEdit');//---Post Edit Page
+Route::post('articleUpdate', 'AdminPostController@update')->name('articleUpdate');//---Save Edited Page
+Route::get('articleDelete/{id}', 'AdminPostController@destroy')->name('articleDelete');//---Delete Page
+Route::get('AdminArticleShow/{id}', 'AdminPostController@show')->name('AdminArticleShow');//--Admin show Page from Sadala
+Route::get('AdminSadalaShow/{id}', 'AdminPostController@AdminSadalaShow')->name('AdminSadalaShow');//---All Admin Pages from Sadala
 
-
-Route::get('articleShow/{id}', 'MainController@articleShow')->name('articleShow');
-Route::post('{post_id}/{comment_id}','CommentController@ReplyToComment')->name('ReplyToComment');
-
-Route::post('articleStore','AdminPostController@store')->name('articleStore');
-Route::get('page/create','AdminPostController@create')->name('articleCreate');
-Route::get('AdminArticleShow/{id}', 'AdminPostController@show')->name('AdminArticleShow');
-Route::get('articleEdit/{id}', 'AdminPostController@edit')->name('articleEdit');
-Route::get('articleDelete/{id}', 'AdminPostController@destroy')->name('articleDelete');
-Route::post('articleUpdate', 'AdminPostController@update')->name('articleUpdate');
+//---Admin Comments and replies to comments
+Route::post('CommentStore', 'AdminCommentController@AdminCommentStore')->name('AdminCommentStore');
+Route::get('DeleteComment/{commentid}/{postid}', 'AdminCommentController@destroy')->name('CommentDelete');
+Route::get('AnswerDelete/{commentanswerid}/{answerpostid}', 'AdminCommentController@destroyAnswer')->name('AnswerDelete');
+Route::post('AdminReplyStore/{post_id}/{comment_id}','AdminCommentController@AdminReplyComment')->name('AdminReplyComment');
+Route::post('AdminCommentReplyStore/{id}/{ip}', 'AdminCommentController@AdminReplyStore')->name('AdminCommentReplyStore');
+//----Admin Sadalas
+Route::post('SadalaStore', 'AdminSadalaController@store')->name('SadalaStore');
 Route::resource('admin/sadalas/new_sadala', 'AdminSadalaController');
 
-// Route::get('/admin/posts/edit/{{$post->id}}', 'AdminPostController@edit');
 
-//Route::resource('/admin/posts', 'AdminPostController');
 
-Route::get('/admin', 'AdminPostController@index');
+
+
 
 //Route::auth();

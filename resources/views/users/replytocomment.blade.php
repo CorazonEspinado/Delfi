@@ -34,7 +34,10 @@
                             <input type="hidden" class="form-control" name="comment_id" value="{{$comment->id}}">
                             <input type="hidden" class="form-control" id="ip" name="ip" value="{{$_SERVER['REMOTE_ADDR']}}">
 
-
+ 
+           
+            {!! captcha_image_html('ContactCaptcha') !!}
+  <input type="text" id="CaptchaCode" name="CaptchaCode"><span style="color: red">*</span>
                         </div>
                         <button type="submit" class="btn btn-primary">Прокомментировать</button>
 

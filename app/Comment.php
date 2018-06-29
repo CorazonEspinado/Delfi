@@ -11,7 +11,7 @@ class Comment extends Model
     public function answers()
     {
          
-        return $this->hasMany('App\Answer');
+        return $this->hasMany('App\Answer')->withTrashed();
     }
     use SoftDeletes;
     protected $fillable=['name', 'comment', 'post_id', 'ip', 'deleted_at'];

@@ -2,15 +2,20 @@
 
 @section('sadalaform')
 
-    {!! Form::open(['action'=>'AdminSadalaController@store', 'method'=>'POST']) !!}
+    
+    
+    <form method="POST" action="{{route('SadalaStore')}}" enctype="multipart/form-data">
 
     <div class="form-group">
-        {{Form::label('title', 'Название раздела')}}
-        {{Form::text('title', '', ['class'=>'form-control', 'placeholder'=>'раздел'])}}
+    <label for='title'>Название раздела</label>
+    <input type="text" class='form-control' name='title' id='title' placeholder="Название раздела">
     </div>
     
-    {{Form::submit('OK', ['class'=>'btn btn-primary', 'title'=>'OK'])}}
-
-    {!! Form::close() !!}
+    
+   
+    <input type='submit' class='btn btn-primary' value="OK">
+{{ csrf_field() }}
+</form>
+    
 
     @endsection

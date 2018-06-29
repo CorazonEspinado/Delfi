@@ -72,8 +72,9 @@
                             <textarea class="form-control" rows="3" id="comment" name="comment"></textarea>
                             <input type="hidden" class="form-control" id="sadala" name="post_id" value="{{$posts->id}}">
                             <input type="hidden" class="form-control" id="ip" name="ip" value="{{$_SERVER['REMOTE_ADDR']}}">
-
-
+                            <br>
+                        {!! captcha_image_html('ContactCaptcha') !!}
+  <input type="text" id="CaptchaCode" name="CaptchaCode">
                         </div>
                         <button type="submit" class="btn btn-primary">Прокомментировать</button>
 
@@ -93,7 +94,7 @@
                 @foreach ($posts->comments as $comment)
 
                 <div class="media">
-                    <a class="pull-left" href="#">
+                    <a class="pull-left">
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
@@ -105,7 +106,7 @@
                         </h4>
                         @if (!empty($comment->deleted_at)) 
                         
-                        <b>Комментарий удалён! {{$comment->deleted_at}}</b>
+                        <b style="color: red">Комментарий удалён модератором! {{$comment->deleted_at}}</b>
                         
                         @else
                         <h4>{{$comment->comment}}</h4>
@@ -115,19 +116,25 @@
                            <input type="submit" name="submit" value="Ответить">
                            {{csrf_field()}}
                         </form>
+                        @endif
                         
                         @if (count($comment->answers)>0)
                         
                         @foreach ($comment->answers as $answer)
                         <div class="media">
-                        <a class="pull-left" href="#">
+                        <a class="pull-left">
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
                         <div class="media-body">
                            <h4 class="media-heading">{{$answer->answer_author}}
-                                <small>{{$answer->created_at}} IP:</small>
-                            </h4>
+                                <small>{{$answer->created_at}} IP: {{$answer->ip}}</small>
+                           </h4>
+                            @if (empty($answer->deleted_at)) 
                             {{$answer->answer_text}}
+                            @else 
+                            <b style="color: red">Ответ удалён модератором! {{$answer->deleted_at}}</b>
+                            @endif
+                            
                         
                          <!--End Nested Comment--> 
                     </div>
@@ -140,7 +147,7 @@
                     </div>
                 </div>
                
-                @endif
+                
                  @endforeach   
 
 
