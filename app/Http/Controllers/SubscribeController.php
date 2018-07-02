@@ -17,11 +17,11 @@ class SubscribeController extends Controller
     
     public function SubscribeStore(Request $request) {
         $this->validate($request, [
-            'subscriber' => 'required|max:15',
+            'Vards' => 'required|max:15',
             'email' => 'required|max:30|unique:subscribers'
             ]);
         Subscriber::Create([
-            'subscriber'=>$request['subscriber'],
+            'subscriber'=>$request['Vards'],
             'email'=>$request['email']
             ]);
         $request->session()->flash('success', 'Вы только что подписались на свежие новости!');

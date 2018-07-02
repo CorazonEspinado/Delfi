@@ -7,7 +7,7 @@
 
     <div class="form-group">
     <label for='subscriber'>Имя:</label>
-    <input type="text" class='form-control' name='subscriber' id='subscriber' placeholder="Имя">
+    <input type="text" class='form-control' name='Vards' id='subscriber' placeholder="Имя">
     </div>
     
     <div class="form-group">

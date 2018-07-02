@@ -8,24 +8,30 @@ use App\Http\Requests;
 use App\Post;
 use App\Sadala;
 use App\Comment;
+use App\Visit;
 
 
 class MainController extends Controller
 {
      public function __construct()
     {
-      $user_agent = $_SERVER["HTTP_USER_AGENT"];
+      
+    }
+    public function Main()
+    {
+          $user_agent = $_SERVER["HTTP_USER_AGENT"];
         if (strpos($user_agent, "Firefox") !== false) $browser = "Firefox";
   elseif (strpos($user_agent, "Opera") !== false) $browser = "Opera";
   elseif (strpos($user_agent, "Chrome") !== false) $browser = "Chrome";
   elseif (strpos($user_agent, "MSIE") !== false) $browser = "Internet Explorer";
   elseif (strpos($user_agent, "Safari") !== false) $browser = "Safari";
   else $browser = "Неизвестный";  
-   
-    }
-    public function Main()
-    {
-           
+  $ip=$_SERVER['REMOTE_ADDR'];
+//  $visit->browser=$browser;
+  Visit::Create([
+      'ip'=>$ip,
+      'browser'=>$browser
+  ]); 
         $posts = Post::orderBy('created_at', 'desc')->get();
         $sadalas=sadala::all();
         return view('users.posts')->with(['posts' =>$posts, 'sadalas'=>$sadalas]);

@@ -4,12 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/OSPanel/domains/delfi/resources/views/users/replytocomment.blade.php</file>
+            <file>file:/D:/OSPanel/domains/delfi/resources/views/admins/emails/newentry.blade.php</file>
             <file>file:/D:/OSPanel/domains/delfi/resources/views/users/show.blade.php</file>
             <file>file:/D:/OSPanel/domains/delfi/resources/views/users/layouts/template.blade.php</file>
+            <file>file:/D:/OSPanel/domains/delfi/resources/views/admins/create_form.blade.php</file>
             <file>file:/D:/OSPanel/domains/delfi/resources/views/admins/article_show.blade.php</file>
             <file>file:/D:/OSPanel/domains/delfi/app/Http/Controllers/AdminPostController.php</file>
+            <file>file:/D:/OSPanel/domains/delfi/.env</file>
             <file>file:/D:/OSPanel/domains/delfi/resources/views/admins/emails/newarticle.blade.php</file>
             <file>file:/D:/OSPanel/domains/delfi/app/Http/Controllers/MainController.php</file>
+            <file>file:/D:/OSPanel/domains/delfi/database/migrations/2018_06_29_073259_visits_table.php</file>
             <file>file:/D:/OSPanel/domains/delfi/app/Http/Controllers/CommentController.php</file>
         </group>
     </open-files>

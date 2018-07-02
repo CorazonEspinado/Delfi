@@ -43,13 +43,52 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="corazon.lv">{{config('app.name')}}</a>
-            {{$title}}
-        {{$author}}
-        {{$anotation}}
-         {{$body}}
+            
         </div>
         
     </div>
+    </nav>
+        
+    <div class="container">
+        <ol class="breadcrumb">
+            <!--<li><a href="/">Главная страница</a>-->
+            </li>
+        </ol>
+      
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            
+            <div class="col-lg-12">
+                <h1 class="page-header"><h1>{{$title}}</h1>
+                    <small>by {{$author}}</a>
+                    </small>
+                </h1>
+
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-lg-8">
+                <hr>
+                <p><i class="fa fa-clock-o"></i> Опубликовано: </p>
+                <p>Раздел: {{$sadalaname}} </p>
+                <p>Автор: {{$author}}</p>
+
+                <p style="text-align:center;">
+                                
+                                </p>
+
+                <p>{{$body}}</p>
+                
+                <hr>
+                <hr>
+              </div>
+                </div>
+                </div>
+
+                        </div>
+
+        </div>
    
 </nav>
     

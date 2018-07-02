@@ -20,10 +20,10 @@ class AdminPostController extends Controller
     {
          $posts = Post::orderBy('created_at', 'desc')->get();
         $sadalas = sadala::all();
-        Mail::send('admins.emails.newarticle', array('key' => 'value'), function($message)
-{
-    $message->to('romans@bmsgroup.eu', 'Джон Смит')->subject('Зашли!');
-});
+//        Mail::send('admins.emails.newentry', array('key' => 'value'), function($message)
+//{
+//    $message->to('romans@bmsgroup.eu', 'Джон Смит')->subject('Зашли!');
+//});
         return view('admins.admin_posts')->with(['sadalas' => $sadalas,
             'posts' => $posts]);
     }
@@ -66,6 +66,7 @@ class AdminPostController extends Controller
          $trumbpath = public_path('images/700x450/' . $trumbname);
          Image::make($trumb->getRealPath())->resize(100, 100)->save($trumbpath);
          Image::make($articlepic->getRealPath())->resize(900, 300)->save($articlepicpath);
+         $tmp='images/700x450/'.$trumbname;
          $post->trumbnail = 'images/700x450/'.$trumbname;
          $post->articlepic = 'images/900x300/'.$articlepicname;
          }
@@ -75,26 +76,31 @@ class AdminPostController extends Controller
          $author=$request->input('author');
          $anotation=$request->input('anotation');
          $body=$request->input('body');
+         $tmp=post::select('trumbnail')->latest();
+         $sadala=post::latest()->first();
+         $sadalaname=$sadala->sadalas->sadala_name;
+                
          
          Mail::send('admins.emails.newarticle',
              ['title'=>$title, 
              'author'=>$author,
              'anotation'=>$anotation,
-             'body'=>$body], 
+             'body'=>$body,
+              'sadalaname'=>$sadalaname], 
               function ($message) {
              $subscribers=subscriber::all();
              $last=post::latest()->first();
+
+             
              foreach ($subscribers as $subscriber){
-                 
-                 
-                                 
-          $message->to($subscriber->email, 'Receiver')->subject($last->author);
+                           
+          $message->to($subscriber->email, $subscriber->subscriber)->subject($last->title);
          }
             
         });
          
        
-//        return redirect('/admin')->with('success', 'Post created!');
+        return redirect('/admin')->with('success', 'Post created!');
     }
 
     public function show($id)
